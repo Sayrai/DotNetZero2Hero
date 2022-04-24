@@ -10,11 +10,14 @@ namespace SOLID
         private readonly Collection<User> _usersStore;
         private readonly UserRegistration _registration;
         private readonly UserAccess _access;
+
+        private readonly UserDetails _userDetails;
         public UserManager()
         {
             _usersStore = new();
             _registration = new UserRegistration(_usersStore);
             _access = new UserAccess(_usersStore);
+            _userDetails = new UserDetails(_usersStore.userId);
 
         }
         public void Register(string userId, string userName, string password)
@@ -36,6 +39,7 @@ namespace SOLID
             if (_access.Login(userName, password))
             {// security mechanism
                 Console.WriteLine($"{userName} successfully logged in");
+                _userDetails.GetDetails(userId);
             }
             else
             {
@@ -44,13 +48,7 @@ namespace SOLID
 
         }
 
-        public string GetDetails(string userId)
-        {
-            var user = _usersStore.FirstOrDefault(u => u.Id == userId);
-            if (user == null) return "User not found";
 
-            return $"UserId: {user.Id} - UserName: {user.UserName}";
-        }
 
     }
 }

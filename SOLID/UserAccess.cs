@@ -11,12 +11,22 @@ namespace SOLID
         }
         public bool Login(string userName, string password)
         {  
-            //check if user exists
-            //check if username/password match
-            var userExists = _usersStore.Any(x => x.UserName == userName && x.Password == password);
+            // check if password is greater than 6
 
-            //return login status
-            return userExists;
+            if(password.Length < 6) {
+
+                return "Password length should be more than 6";
+                
+            } else {
+                //check if user exists
+                 //check if username/password match
+            
+                var userExists = _usersStore.Any(x => x.UserName == userName && x.Password == password);
+                //return login status
+                return userExists;
+            }
+           
+            
         }
     }
 }

@@ -14,7 +14,7 @@ namespace SOLID
             if (string.IsNullOrEmpty(userName)) throw new ArgumentNullException(nameof(userName), $"{nameof(userName)} cannot be null or empty string");
             if (string.IsNullOrEmpty(userId)) throw new ArgumentNullException(nameof(userId), $"{nameof(userId)} cannot be null or empty string");
             if (string.IsNullOrEmpty(password)) throw new ArgumentNullException(nameof(password), $"{nameof(password)} cannot be null or empty string");
-
+            if(password.Length < 6) throw new System.Exception("Password length should be greater than 6");
             var newUser = User.Register(userId, userName, password);
             _usersStore.Add(newUser);
         }
