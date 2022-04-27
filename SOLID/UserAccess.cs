@@ -15,7 +15,7 @@ namespace SOLID
 
             if(password.Length < 6) {
 
-                return "Password length should be more than 6";
+                return 'Password length should be more than 6';
                 
             } else {
                 //check if user exists

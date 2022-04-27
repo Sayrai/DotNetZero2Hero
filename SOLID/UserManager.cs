@@ -17,7 +17,7 @@ namespace SOLID
             _usersStore = new();
             _registration = new UserRegistration(_usersStore);
             _access = new UserAccess(_usersStore);
-            _userDetails = new UserDetails(_usersStore.userId);
+            _userDetails = new UserDetails(_usersStore);
 
         }
         public void Register(string userId, string userName, string password)
@@ -39,13 +39,21 @@ namespace SOLID
             if (_access.Login(userName, password))
             {// security mechanism
                 Console.WriteLine($"{userName} successfully logged in");
-                _userDetails.GetDetails(userId);
+              
             }
             else
             {
                 Console.WriteLine($"login failed for {userName} (user does not exist)");
             }
 
+        }
+
+        public string GetDetails(string userId)
+        {
+            var user = _usersStore.FirstOrDefault(u => u.Id == userId);
+            if (user == null) return "User not found";
+
+            return $"UserId: {user.Id} - UserName: {user.UserName}";
         }
 
 

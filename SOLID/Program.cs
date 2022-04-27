@@ -3,11 +3,13 @@ using SOLID;
 
 Console.WriteLine("Hello, Welcome to X portal, Enter L to Login and R to Register");
 var manager = new UserManager();
+
 RegisterNewUser(manager);
-var input = Console.ReadLine();
+
 
 static void RegisterNewUser(UserManager manager)
 {
+    var input = Console.ReadLine();
     while (true)
     {
 
@@ -18,11 +20,12 @@ static void RegisterNewUser(UserManager manager)
         var password = Console.ReadLine();
         string userId = Guid.NewGuid().ToString("N");
         manager.Register(userId, userName, password);
-        var user = manager.GetDetails(userId);
+        var user = manager.GetDetails(userId); 
+       
         Console.WriteLine($"User: {user}");
         Console.WriteLine("====================================");
 
-        } else if(input == 'L') {
+        } else if( input == "L") {
 
         Console.Write("Enter the username: ");
         var userName = Console.ReadLine();
